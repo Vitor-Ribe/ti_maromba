@@ -59,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
     final items = <Widget> [
       Icon(Icons.home_outlined, size: 30, color: index == 0 ? AppColors.primary : Colors.grey),
       Icon(Icons.calendar_month_outlined, size: 30, color: index == 1 ? AppColors.primary : Colors.grey),
-      Icon(Icons.monitor_heart_outlined, size: 30, color: index == 2 ? AppColors.primary : Colors.grey),
+      Icon(Icons.bar_chart_outlined, size: 30, color: index == 2 ? AppColors.primary : Colors.grey),
       Icon(Icons.person_outline, size: 30, color: index == 3 ? AppColors.primary : Colors.grey)
     ];
 
