@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/services.dart';
+import 'package:ti_maromba/pages/calendar_page.dart';
 import 'package:ti_maromba/pages/config_page.dart';
 import 'package:ti_maromba/pages/data_page.dart';
 import 'package:ti_maromba/pages/home_page.dart';
@@ -48,6 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final screens = [
     HomePage(),
+    CalendarPage(),
     DataPage(),
     ConfigPage()
   ];
@@ -55,18 +57,20 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final items = <Widget> [
-      Icon(Icons.home, size: 30, color: Colors.white),
-      Icon(Icons.monitor_heart, size: 30, color: Colors.white),
-      Icon(Icons.person, size: 30, color: Colors.white)
+      Icon(Icons.home_outlined, size: 30, color: index == 0 ? AppColors.primary : Colors.grey),
+      Icon(Icons.calendar_month_outlined, size: 30, color: index == 1 ? AppColors.primary : Colors.grey),
+      Icon(Icons.monitor_heart_outlined, size: 30, color: index == 2 ? AppColors.primary : Colors.grey),
+      Icon(Icons.person_outline, size: 30, color: index == 3 ? AppColors.primary : Colors.grey)
     ];
 
     return Scaffold(
       appBar: null,
       body:(screens[index]),
       bottomNavigationBar: CurvedNavigationBar(
-        backgroundColor: AppColors.primary,
+        backgroundColor: AppColors.background,
+        buttonBackgroundColor: AppColors.secondary,
         animationCurve: Curves.easeInOut,
-        color: AppColors.bottomNavBarBG,
+        color: AppColors.secondary,
         animationDuration: Duration(milliseconds: 300),
         height: 75,
         items: items,
