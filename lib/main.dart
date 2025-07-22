@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:flutter/services.dart';
 import 'package:ti_maromba/pages/config_page.dart';
 import 'package:ti_maromba/pages/data_page.dart';
 import 'package:ti_maromba/pages/home_page.dart';
+import 'package:ti_maromba/res/colors.dart';
 
 void main() {
+  // deixar barra de notificação com icones em branco
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.light,
+      statusBarBrightness: Brightness.dark, // iOS
+    ),
+  );
+
   runApp(const MyApp());
 }
 
@@ -41,12 +52,6 @@ class _MyHomePageState extends State<MyHomePage> {
     ConfigPage()
   ];
 
-  final pageTitles = [
-    'Tela Inicial',
-    'Dados de atividade',
-    'Configurações'
-  ];
-
   @override
   Widget build(BuildContext context) {
     final items = <Widget> [
@@ -56,17 +61,12 @@ class _MyHomePageState extends State<MyHomePage> {
     ];
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(pageTitles[index], style: TextStyle(color: Colors.blue.shade900)),
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        centerTitle: true
-      ),
+      appBar: null,
       body:(screens[index]),
       bottomNavigationBar: CurvedNavigationBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: AppColors.primary,
         animationCurve: Curves.easeInOut,
-        color: Colors.blue.shade700,
+        color: AppColors.bottomNavBarBG,
         animationDuration: Duration(milliseconds: 300),
         height: 75,
         items: items,
