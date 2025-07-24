@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../res/colors.dart';
 import 'steps_base.dart';
 
 class StepWelcome extends StepBase {
@@ -22,12 +23,38 @@ class StepWelcome extends StepBase {
           const Text(
               'Bem-Vindo(a) ao TI Maromba',
               style: TextStyle(
-                  fontSize: 40,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold
+                fontSize: 35,
+                color: Colors.white70,
+                fontWeight: FontWeight.bold,
+
               )
           ),
-          ElevatedButton(onPressed: onNext, child: const Text('Próximo'))
+
+          const SizedBox(height: 40),
+
+          // Botão de próximo
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.backgroundVariant1,
+              foregroundColor: Colors.white,
+              shadowColor: Colors.black38,
+              elevation: 3,
+              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(25),
+              ),
+              side: BorderSide(color: Colors.black), // borda
+              minimumSize: Size(360, 50),
+            ),
+            onPressed: onNext,
+            child: const Text(
+              'Próximo',
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.white70
+              ),
+            )
+          )
       ]),
     );
   }

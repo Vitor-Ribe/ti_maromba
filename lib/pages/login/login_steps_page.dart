@@ -23,7 +23,7 @@ class _LoginStepsPageState extends State<LoginStepsPage> {
   int page = 0;
 
   void next() {
-    if (page < 3) {
+    if (page < 4) {
       pageCtrl.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.ease);
       setState(() => page++);
     } else {

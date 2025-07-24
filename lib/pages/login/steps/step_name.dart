@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../res/colors.dart';
 import 'steps_base.dart';
 
 class StepName extends StepBase {
@@ -7,17 +8,60 @@ class StepName extends StepBase {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        const Text('Seu nome', style: TextStyle(fontSize: 24)),
-        Padding(
-          padding: const EdgeInsets.all(16),
-          child: TextField(
-            autofocus: true,
-            onChanged: (v) => ctrl.nome = v,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text(
+            'Qual seu nome?',
+            style: TextStyle(
+              fontSize: 25,
+              color: Colors.white70,
+              fontWeight: FontWeight.bold
+            )
           ),
-        ),
-        ElevatedButton(onPressed: onNext, child: const Text('Próximo'))
-      ]),
+
+
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 20),
+            child: TextField(
+              style: TextStyle(
+                color: Colors.white70
+              ),
+              decoration: InputDecoration(
+                hintText: 'Digite seu nome aqui'
+              ),
+              autofocus: true,
+              onChanged: (v) => ctrl.nome = v,
+            ),
+          ),
+
+          const SizedBox(height: 40),
+
+          // Botão de próximo
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.backgroundVariant1,
+              foregroundColor: Colors.white,
+              shadowColor: Colors.black38,
+              elevation: 3,
+              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(25),
+              ),
+              side: BorderSide(color: Colors.black), // borda
+              minimumSize: Size(310, 50),
+            ),
+            onPressed: onNext,
+            child: const Text(
+              'Próximo',
+              style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.white70
+              ),
+            )
+          )
+        ]
+      ),
     );
   }
 }
