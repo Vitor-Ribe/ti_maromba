@@ -7,6 +7,8 @@ class AppColors {
   static const Color secondaryVariant = Color(0xFF018786);
 
   static const Color background = Color(0xFF141414);
+  static const Color backgroundVariant1 = Color(0xFF002132);
+  static const Color backgroundVariant2 = Color(0xFF001425);
   static const Color bottomNavBarBG = Color(0xFF161719);
   static const Color surface = Color(0xFFFFFFFF);
   static const Color error = Color(0xFFB00020);

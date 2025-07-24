@@ -70,7 +70,7 @@ class CalendarPage extends StatelessWidget {
                 ,
               ),
 
-              SizedBox(height: 60),
+              SizedBox(height: 30),
 
               Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -79,7 +79,7 @@ class CalendarPage extends StatelessWidget {
                   ]
               ),
 
-              SizedBox(height: 20),
+              SizedBox(height: 10),
 
               Row(
                 children: [

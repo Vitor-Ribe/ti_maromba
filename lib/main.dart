@@ -5,6 +5,7 @@ import 'package:ti_maromba/pages/calendar_page.dart';
 import 'package:ti_maromba/pages/config_page.dart';
 import 'package:ti_maromba/pages/data_page.dart';
 import 'package:ti_maromba/pages/home_page.dart';
+import 'package:ti_maromba/pages/login/login_steps_page.dart';
 import 'package:ti_maromba/res/colors.dart';
 
 void main() {
@@ -27,12 +28,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'TI Maromba',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home: const MyHomePage(),
+      debugShowCheckedModeBanner: false, // remove banner
+
+      // rota inicial
+      initialRoute: '/login',
+
+      // mapa das rotas disponiveis
+      routes: {
+        '/login': (context) => LoginStepsPage(),
+        '/main': (context) => MyHomePage() // tela inicial
+      }
     );
   }
 }
