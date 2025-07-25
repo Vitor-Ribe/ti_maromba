@@ -6,8 +6,14 @@ class StepName extends StepBase {
   const StepName({super.key, required super.ctrl, required super.onNext});
 
   @override
+  State<StepName> createState() => _StepNameState();
+}
+
+class _StepNameState extends State<StepName> {
+  @override
   Widget build(BuildContext context) {
-    return Center(
+    return Padding(
+      padding: const EdgeInsets.all(35.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -16,51 +22,50 @@ class StepName extends StepBase {
             style: TextStyle(
               fontSize: 25,
               color: Colors.white70,
-              fontWeight: FontWeight.bold
-            )
-          ),
-
-
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 20),
-            child: TextField(
-              style: TextStyle(
-                color: Colors.white70
-              ),
-              decoration: InputDecoration(
-                hintText: 'Digite seu nome aqui'
-              ),
-              autofocus: true,
-              onChanged: (v) => ctrl.nome = v,
+              fontWeight: FontWeight.bold,
             ),
           ),
 
-          const SizedBox(height: 40),
+          const SizedBox(height: 25),
 
-          // Botão de próximo
+          TextField(
+            style: const TextStyle(color: Colors.white70),
+            decoration: const InputDecoration(
+              hintText: 'Digite seu nome aqui',
+              hintStyle: TextStyle(color: Colors.white38),
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.white24),
+              ),
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.white70),
+              ),
+            ),
+            autofocus: true,
+            onChanged: (v) => widget.ctrl.nome = v,
+          ),
+
+          const SizedBox(height: 60),
+
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.backgroundVariant1,
               foregroundColor: Colors.white,
               shadowColor: Colors.black38,
               elevation: 3,
-              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(25),
               ),
-              side: BorderSide(color: Colors.black), // borda
-              minimumSize: Size(310, 50),
+              side: const BorderSide(color: Colors.black),
+              minimumSize: const Size(310, 50),
             ),
-            onPressed: onNext,
+            onPressed: widget.onNext,
             child: const Text(
               'Próximo',
-              style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.white70
-              ),
-            )
-          )
-        ]
+              style: TextStyle(fontSize: 20, color: Colors.white70),
+            ),
+          ),
+        ],
       ),
     );
   }

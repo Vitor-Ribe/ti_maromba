@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:ti_maromba/pages/login/steps/step_welcome.dart';
 import 'package:ti_maromba/res/colors.dart';
 import '../../app/database/DAOs/user_dao.dart';
+import '../../app/database/db_script.dart';
 import '../../app/modelos/user.dart';
 import 'login_controller.dart';
 import 'steps/step_name.dart';
@@ -34,17 +34,34 @@ class _LoginStepsPageState extends State<LoginStepsPage> {
   Future<void> _finish() async {
     if (!ctrl.isComplete) return;
 
+    final db = await openAppDatabase();
     final user = User(
       nome: ctrl.nome,
+      nascimento: ctrl.nascimento!, // DateTime direto, não string
+      sexo: ctrl.sexo,
       telefone: null,
       email: null,
       peso: ctrl.peso,
       altura: ctrl.altura,
     );
-    await UserDao(await openDatabase('app.db')).insertUser(user); // ajuste se já usa helper
+
+
+    int id = await UserDao(db).insertUser(user);
+    print('Usuário salvo com id: $id');
+
+    // Busca para confirmar
+    final savedUser = await db.query('user', where: 'id = ?', whereArgs: [id]);
+
+    if (savedUser.isNotEmpty) {
+      print('Usuário encontrado no banco: ${savedUser.first}');
+    } else {
+      print('Erro: usuário não encontrado após salvar.');
+    }
+
     if (!mounted) return;
     Navigator.pushReplacementNamed(context, '/main');
   }
+
 
   @override
   Widget build(BuildContext context) {

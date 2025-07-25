@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/services.dart';
+import 'package:sqflite/sqflite.dart';
 import 'package:ti_maromba/pages/calendar_page.dart';
 import 'package:ti_maromba/pages/config_page.dart';
 import 'package:ti_maromba/pages/data_page.dart';
@@ -8,7 +9,11 @@ import 'package:ti_maromba/pages/home_page.dart';
 import 'package:ti_maromba/pages/login/login_steps_page.dart';
 import 'package:ti_maromba/res/colors.dart';
 
-void main() {
+import 'app/database/db_script.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized(); // obrigatório para uso async no main()
+
   // deixar barra de notificação com icones em branco
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(
@@ -18,26 +23,30 @@ void main() {
     ),
   );
 
-  runApp(const MyApp());
+  final db = await openAppDatabase();
+  final count = Sqflite.firstIntValue(
+      await db.rawQuery('SELECT COUNT(*) FROM user'),
+  ) ?? 0;
+
+  runApp(MyApp(
+    initialRoute: count == 0 ? '/login' : '/main',
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final String initialRoute;
 
-  // This widget is the root of your application.
+  const MyApp({required this.initialRoute, super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false, // remove banner
-
-      // rota inicial
-      initialRoute: '/login',
-
-      // mapa das rotas disponiveis
+      debugShowCheckedModeBanner: false,
+      initialRoute: initialRoute,
       routes: {
-        '/login': (context) => LoginStepsPage(),
-        '/main': (context) => MyHomePage() // tela inicial
-      }
+        '/login': (context) => const LoginStepsPage(),
+        '/main': (context) => const MyHomePage(),
+      },
     );
   }
 }
